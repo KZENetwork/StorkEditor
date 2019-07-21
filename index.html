@@ -146,7 +146,7 @@
                                     <small id="mapRoundHelp" class="form-text text-muted">1プレイ中に繰り返すラウンド回数を設定します。</small>
                                     <script>
                                         $('#mapRound').on('input', function(event) {
-                                            mapData.max_player = $('#mapRound').val();
+                                            mapData.round = $('#mapRound').val();
                                         });
                                     </script>
                                 </div>
@@ -161,7 +161,7 @@
                                     <small id="mapRoundTimeHelp" class="form-text text-muted">マップに参加できる最小人数を設定します。</small>
                                     <script>
                                         $('#mapRoundTime').on('input', function(event) {
-                                            mapData.min_player = $('#mapRoundTime').val();
+                                            mapData.round_time = $('#mapRoundTime').val();
                                         });
                                     </script>
                                 </div>
