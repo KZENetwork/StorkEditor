@@ -14,9 +14,15 @@
 </head>
 <body>
 <div id="wrapper">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>KZE Map Editor</h1>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <header>
-            <h1>KZE Map Editor</h1>
             <div class="card mb-3">
                 <img class="card-img-top" src="./img/1149x180.png" alt="Card image cap">
                 <div class="card-body">
@@ -121,15 +127,17 @@
             </div>
             <form>
                 <div class="form-group">
-                <button type="button" onclick="outPutMapData()" class="btn btn-primary">Submit</button>
+                    <button type="button" onclick="outPutMapData()" class="btn btn-primary"><i class="material-icons">create</i> 出力する</button>
                 </div>
             </form>
             <hr/>
             <from>
                 <div class="form-group">
-                    <label for="outPutTextArea">Output TextArea</label>
+                    <label for="outPutTextArea">map.json</label>
                     <textarea class="form-control" id="outPutTextArea" rows="15"></textarea>
-                    <button type="button" onclick="copyClipboard(outPutTextArea)" class="btn btn-primary">Copy To ClipBoard</button>
+                    <button type="button" onclick="copyClipboard(outPutTextArea)" class="btn btn-primary"><i class="material-icons">attachment</i> クリップボードに保存</button>
+                    <button type="button" onclick="inputTextField(outPutTextArea)" class="btn btn-primary"><i class="material-icons">publish</i> Editorへ読み込み</button>
+                    <small id="outPutTextAreaHelp" class="form-text text-muted">読み込みを行うにはテキストフィールドにmap.jsonの中身を入れてから"Editorへ読み込み"を選択してください。</small>
                 </div>
             </from>
             <hr/>
@@ -147,5 +155,8 @@
         </footer>
     </div>
 </div>
+<script>
+    initFunctions();
+</script>
 </body>
 </html>

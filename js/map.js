@@ -36,7 +36,6 @@ mapData.zombie_escape = zeData;
 
 function outPutMapData() {
     var text = JSON.stringify(mapData, null, 4);
-    console.log(text);
     $("#outPutTextArea").val(text);
 }
 
@@ -45,45 +44,67 @@ function copyClipboard(id) {
     document.execCommand('copy');
 }
 
-$('#mapId').on('input', function(event) {
-    mapData.id = $('#mapId').val();
-});
+function inputTextField(id) {
+    var text = $(id).val();
+    mapData = JSON.parse(text);
+    updateForums();
+}
 
-$('#mapName').on('input', function(event) {
-    mapData.name = $('#mapName').val();
-});
+function updateForums() {
+    $("#mapId").val(mapData.id);
+    $("#mapName").val(mapData.name);
+    $("#mapAuthor").val(mapData.author);
+    $("#mapPlayerMax").val(mapData.max_player);
+    $("#mapPlayerMin").val(mapData.min_player);
+    $("#mapRound").val(mapData.round);
+    $("#mapRoundTime").val(mapData.round_time);
+    $("#mapSchematic").val(mapData.schematic);
+    $("#mapVote").val(mapData.vote);
+}
+
+function initFunctions() {
+
+    $('#mapId').on('input', function(event) {
+        mapData.id = $('#mapId').val();
+    });
+
+    $('#mapName').on('input', function(event) {
+        mapData.name = $('#mapName').val();
+    });
 
 
-$('#mapAuthor').on('input', function(event) {
-    mapData.author = $('#mapAuthor').val();
-});
+    $('#mapAuthor').on('input', function(event) {
+        mapData.author = $('#mapAuthor').val();
+    });
 
-$('#mapPlayerMax').on('input', function(event) {
-     mapData.max_player = $('#mapPlayerMax').val();
-});
+    $('#mapPlayerMax').on('input', function(event) {
+         mapData.max_player = $('#mapPlayerMax').val();
+    });
 
-$('#mapPlayerMin').on('input', function(event) {
-    mapData.min_player = $('#mapPlayerMin').val();
-});
+    $('#mapPlayerMin').on('input', function(event) {
+        mapData.min_player = $('#mapPlayerMin').val();
+    });
 
-$('#mapRound').on('input', function(event) {
-    mapData.round = $('#mapRound').val();
-});
+    $('#mapRound').on('input', function(event) {
+        mapData.round = $('#mapRound').val();
+    });
 
-$('#mapRoundTime').on('input', function(event) {
-    mapData.round_time = $('#mapRoundTime').val();
-});
+    $('#mapRoundTime').on('input', function(event) {
+        mapData.round_time = $('#mapRoundTime').val();
+    });
 
-$('#mapSchematic').on('input', function(event) {
+    $('#mapSchematic').on('input', function(event) {
 
-    mapData.schematic = $('#mapSchematic').val();
+        mapData.schematic = $('#mapSchematic').val();
 
-    // voteの方にも同時に変更する
-    $('#mapVote').val($('#mapSchematic').val() + ".vote");
-    mapData.vote = $('#mapVote').val();
+        // voteの方にも同時に変更する
+        $('#mapVote').val($('#mapSchematic').val() + ".vote");
+        mapData.vote = $('#mapVote').val();
 
-});
+    });
 
-$('#mapVote').on('input', function(event) {
-    mapData.vote = $('#mapVote').val();
-});
+    $('#mapVote').on('input', function(event) {
+        mapData.vote = $('#mapVote').val();
+    });
+
+}
