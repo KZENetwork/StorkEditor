@@ -184,7 +184,12 @@
 
                             <div class="from-group">
                                 <label for="mapSchematic">ステージ構造体</label>
-                                <input type="text" class="form-control" id="mapSchematic" placeholder="hoge"/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="mapSchematic" placeholder="hoge"/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.schem</span>
+                                    </div>
+                                </div>
                                 <small id="mapSchematicHelp" class="form-text text-muted">ステージ全体の構造体を指定します。拡張子を抜いて指定をしてください。hoge.schemの場合はhogeのみ</small>
                                 <script>
                                     $('#mapSchematic').on('input', function(event) {
@@ -199,7 +204,12 @@
 
                             <div class="from-group">
                                 <label for="mapVote">投票所 構造体</label>
-                                <input type="text" class="form-control" id="mapVote" value="hoge.vote" readonly/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="mapVote" value="hoge.vote" readonly/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">.schem</span>
+                                    </div>
+                                </div>
                                 <small id="mapVoteHelp" class="form-text text-muted">投票所で使用する構造体を指定します。Editorでは自動的に命名される為、設定出来ません。</small>
                                 <script>
                                     $('#mapVote').on('input', function(event) {
