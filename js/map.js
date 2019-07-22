@@ -44,3 +44,43 @@ function copyClipboard(id) {
     $(id).select();
     document.execCommand('copy');
 }
+
+                                $('#mapId').on('input', function(event) {
+                                    mapData.id = $('#mapId').val();
+                                });
+
+                                $('#mapName').on('input', function(event) {
+                                    mapData.name = $('#mapName').val();
+                                });
+
+                                $('#mapAuthor').on('input', function(event) {
+                                    mapData.author = $('#mapAuthor').val();
+                                });
+
+                                        $('#mapPlayerMax').on('input', function(event) {
+                                             mapData.max_player = $('#mapPlayerMax').val();
+                                        });
+
+                                        $('#mapPlayerMin').on('input', function(event) {
+                                            mapData.min_player = $('#mapPlayerMin').val();
+                                        });
+
+                                        $('#mapRound').on('input', function(event) {
+                                            mapData.round = $('#mapRound').val();
+                                        });
+
+                                        $('#mapRoundTime').on('input', function(event) {
+                                            mapData.round_time = $('#mapRoundTime').val();
+                                        });
+
+                                    $('#mapSchematic').on('input', function(event) {
+                                        mapData.schematic = $('#mapSchematic').val();
+
+                                        // voteの方にも同時に変更する
+                                        $('#mapVote').val($('#mapSchematic').val() + ".vote");
+                                        mapData.vote = $('#mapVote').val();
+                                    });
+
+                                    $('#mapVote').on('input', function(event) {
+                                        mapData.vote = $('#mapVote').val();
+                                    });
