@@ -3,10 +3,10 @@
 <head lang="ja">
     <meta charset="UTF-8"/>
     <!-- BootStrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/map.js"></script>
     <!-- Material Design -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -35,113 +35,253 @@
             </div>
         </header>
         <div class="content">
-            <div class="row">
-                <div class="col">
-                    <h2>基本設定</h2>
-                    <form>
-                        <div class="form-group">
-                            <label for="mapId">マップID</label>
-                            <input type="text" class="form-control" id="mapId" placeholder="hoge"/>
-                            <small id="mapIdHelp" class="form-text text-muted">マップを識別するためのIDです。他のマップと被らないIDを指定してください。</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="mapName">マップ名</label>
-                            <input type="text" class="form-control" id="mapName" placeholder="Hoge"/>
-                            <small id="mapNameHelp" class="form-text text-muted">マップの表示名を指定します。</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="mapAuthor">製作者名</label>
-                            <input type="text" class="form-control" id="mapAuthor" placeholder="mr_crafter"/>
-                            <small id="mapAuthorHelp" class="form-text text-muted">マップの製作者を指定します。</small>
-                        </div>
-                    </form>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>基本設定</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="mapId">マップID</label>
+                                <input type="text" class="form-control" id="mapId" placeholder="hoge"/>
+                                <small id="mapIdHelp" class="form-text text-muted">マップを識別するためのIDです。他のマップと被らないIDを指定してください。</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="mapName">マップ名</label>
+                                <input type="text" class="form-control" id="mapName" placeholder="Hoge"/>
+                                <small id="mapNameHelp" class="form-text text-muted">マップの表示名を指定します。</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="mapAuthor">製作者名</label>
+                                <input type="text" class="form-control" id="mapAuthor" placeholder="mr_crafter"/>
+                                <small id="mapAuthorHelp" class="form-text text-muted">マップの製作者を指定します。</small>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col">
-                    <h2>参加人数設定</h2>
-                    <form>
-                        <div class="row">
-                            <div class="col">
-                                <div class="from-group">
-                                    <label for="mapPlayerMax">最大人数</label>
-                                    <input type="number" class="form-control" id="mapPlayerMax" value="30"/>
-                                    <small id="mapPlayerMaxHelp" class="form-text text-muted">マップに参加できる人数を設定します。</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="from-group">
-                                    <label for="mapPlayerMin">最小人数</label>
-                                    <input type="number" class="form-control" id="mapPlayerMin" value="10"/>
-                                    <small id="mapPlayerMinHelp" class="form-text text-muted">マップに参加できる最小人数を設定します。</small>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <hr/>
-                    <h2>ラウンド設定</h2>
-                    <form>
-                        <div class="row">
-                            <div class="col">
-                                <div class="from-group">
-                                    <label for="mapRound">ラウンド回数</label>
-                                    <input type="number" class="form-control" id="mapRound" value="2"/>
-                                    <small id="mapRoundHelp" class="form-text text-muted">1プレイ中に繰り返すラウンド回数を設定します。</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="from-group">
-                                    <label for="mapRoundTime">ラウンド時間</label>
-                                    <input type="number" class="form-control" id="mapRoundTime" value="900"/>
-                                    <small id="mapRoundTimeHelp" class="form-text text-muted">ラウンド制限時間を設定します。</small>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col">
-                    <h2>マップ構造体</h2>
-                    <form>
-                        <div class="row">
-                            <div class="from-group">
-                                <label for="mapSchematic">ステージ構造体</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="mapSchematic" placeholder="hoge"/>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">.schem</span>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>ラウンド設定</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="from-group">
+                                        <label for="mapPlayerMax">最大人数</label>
+                                        <input type="number" class="form-control" id="mapPlayerMax" value="30" min="1"/>
+                                        <small id="mapPlayerMaxHelp" class="form-text text-muted">マップに参加できる人数を設定します。</small>
                                     </div>
                                 </div>
-                                <small id="mapSchematicHelp" class="form-text text-muted">ステージ全体の構造体を指定します。拡張子を抜いて指定をしてください。hoge.schemの場合はhogeのみ</small>
-                            </div>
-                            <div class="from-group">
-                                <label for="mapVote">投票所 構造体</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="mapVote" value="hoge.vote" readonly/>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">.schem</span>
+                                <div class="col">
+                                    <div class="from-group">
+                                        <label for="mapPlayerMin">最小人数</label>
+                                        <input type="number" class="form-control" id="mapPlayerMin" value="10" min="1"/>
+                                        <small id="mapPlayerMinHelp" class="form-text text-muted">マップに参加できる最小人数を設定します。</small>
                                     </div>
                                 </div>
-                                <small id="mapVoteHelp" class="form-text text-muted">投票所で使用する構造体を指定します。Editorでは自動的に命名される為、設定出来ません。</small>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        <form>
+                            <div class="row">
+                                <div class="from-group">
+                                    <div class="col">
+                                        <label for="mapRound">ラウンド回数</label>
+                                            <input type="number" class="form-control" id="mapRound" value="2" min="0"/>
+                                        <small id="mapRoundHelp" class="form-text text-muted">1プレイ中に繰り返すラウンド回数を設定します。</small>
+                                    </div>
+                                    <div class="col">
+                                        <label for="mapRoundTime">ラウンド時間</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="mapRoundTime" value="900" min="60" max="108000"/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Tick</span>
+                                            </div>
+                                        </div>
+                                        <small id="mapRoundTimeHelp" class="form-text text-muted">ラウンド制限時間を設定します。 20Tick = 1秒</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>マップ設定</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="from-group">
+                                        <label for="mapSchematic">ステージ構造体</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="mapSchematic" placeholder="hoge"/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">.schem</span>
+                                            </div>
+                                        </div>
+                                        <small id="mapSchematicHelp" class="form-text text-muted">ステージ全体の構造体を指定します。拡張子を抜いて指定をしてください。hoge.schemの場合はhogeのみ</small>
+                                        <label for="mapVote">投票所 構造体</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="mapVote" value="hoge.vote" readonly/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">.schem</span>
+                                            </div>
+                                        </div>
+                                        <small id="mapVoteHelp" class="form-text text-muted">投票所で使用する構造体を指定します。Editorでは自動的に命名される為、設定出来ません。</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mapRound">ワールド時間</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="mapWorldTime" value="4000" min="0" max="24000"/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Tick</span>
+                                            </div>
+                                        </div>
+                                        <small id="mapWorldTimeHelp" class="form-text text-muted">ステージワールドの時間を設定します。 20tick = 1秒</small>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="mapLockWorldTime">
+                                            <label class="custom-control-label" for="mapLockWorldTime">ステージ内の時間経過</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <form>
-                <div class="form-group">
-                    <button type="button" onclick="outPutMapData()" class="btn btn-primary"><i class="material-icons">create</i> 出力する</button>
-                </div>
-            </form>
-            <hr/>
-            <from>
-                <div class="form-group">
-                    <label for="outPutTextArea">map.json</label>
-                    <textarea class="form-control" id="outPutTextArea" rows="15"></textarea>
-                    <button type="button" onclick="copyClipboard(outPutTextArea)" class="btn btn-primary"><i class="material-icons">attachment</i> クリップボードに保存</button>
-                    <button type="button" onclick="inputTextField(outPutTextArea)" class="btn btn-primary"><i class="material-icons">publish</i> Editorへ読み込み</button>
-                    <small id="outPutTextAreaHelp" class="form-text text-muted">読み込みを行うにはテキストフィールドにmap.jsonの中身を入れてから"Editorへ読み込み"を選択してください。</small>
-                </div>
-            </from>
-            <hr/>
         </div>
+        <hr/>
+        <div class="content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>ゲーム固有の設定 <span class="badge badge-secondary">New</span></h2>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="mapGameMode">GameMode</label>
+                        </div>
+                        <select class="custom-select" id="mapGameMode">
+                            <option value="none">None...</option>
+                            <option selected value="ze">ZombieEscape</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="game_mode_ze">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="mapId">脱出カウント</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="zeGoalRemaining" value="20" min="0"/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">秒</span>
+                                    </div>
+                                </div>
+                                <small id="zeGoalRemainingHelp" class="form-text text-muted">脱出カウント時間</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="mapId">ゾンビ出現時間</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="zeZombieSpawnTime" value="15" min="0"/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">秒</span>
+                                    </div>
+                                </div>
+                                <small id="zeZombieSpawnTimeHelp" class="form-text text-muted">初期ゾンビが出現する時間を設定します。</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="mapId">ゾンビ比率</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="zeZombieRatio" value="4" min="1" max="9"/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">割</span>
+                                    </div>
+                                </div>
+                                <small id="zeZombieRatioHelp" class="form-text text-muted">初期ゾンビになる比率を設定します。</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-group">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>逃走者側 開始地点</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="zeHumanSpawnSize" class="input-group mb-3 ze-region-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary ze-region-add" type="button">＋</button>
+                                </div>
+                                <input type="text" class="form-control ze-region-size" value="0" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary ze-region-remove" type="button">ー</button>
+                                </div>
+                            </div>
+                            <div id="zeHumanSpawnRegionList">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>感染者側 開始地点</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="zeZombieSpawnSize" class="input-group mb-3 ze-region-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary ze-region-add" type="button">＋</button>
+                                </div>
+                                <input type="text" class="form-control ze-region-size" value="0" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary ze-region-remove" type="button">ー</button>
+                                </div>
+                            </div>
+                            <div id="zeZombieSpawnRegionList">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>セーフゾーン</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="zeSafeZoneSize" class="input-group mb-3 ze-region-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary ze-region-add" type="button">＋</button>
+                                </div>
+                                <input type="text" class="form-control ze-region-size" value="0" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary ze-region-remove" type="button">ー</button>
+                                </div>
+                            </div>
+                            <div id="zeSafeZoneRegionList">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="form-group">
+                <button type="button" onclick="outPutMapData()" class="btn btn-primary"><i class="material-icons">create</i> 出力する</button>
+            </div>
+        </form>
+        <hr/>
+        <form>
+            <div class="form-group">
+                <label for="outPutTextArea">map.json</label>
+                <textarea class="form-control" id="outPutTextArea" rows="15"></textarea>
+                <button type="button" onclick="copyClipboard(outPutTextArea)" class="btn btn-primary"><i class="material-icons">attachment</i> クリップボードに保存</button>
+                <button type="button" onclick="inputTextField(outPutTextArea)" class="btn btn-primary"><i class="material-icons">publish</i> Editorへ読み込み</button>
+                <small id="outPutTextAreaHelp" class="form-text text-muted">読み込みを行うにはテキストフィールドにmap.jsonの中身を入れてから"Editorへ読み込み"を選択してください。</small>
+            </div>
+        </form>
+        <hr/>
         <footer>
             <h2>INFOMATION</h2>
             <ui>
@@ -150,13 +290,15 @@
                 <li><a href="https://blog.kze.network/">Blog</a></li>
                 <li><a href="http://wiki.kze.network/">Wiki</a></li>
                 <li><a href="https://discordapp.com/invite/3Pa5RXZ">Discord</a></li>
+                <li><a href="https://github.com/thekarura/StorkEditor">Github</a></li>
             </ui>
             <address>&copy; 2019 KZE Network</address>
         </footer>
     </div>
 </div>
 <script>
-    initFunctions();
+    updateForums();
+    changeGameMode($('#mapGameMode').val());
 </script>
 </body>
 </html>

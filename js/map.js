@@ -25,9 +25,9 @@ mapData.lock_world_time = false;
 mapData.single = true;
 
 var zeData = new Object();
-zeData.human_spawns = [new Region()];
-zeData.zombie_spawns = [new Region()];
-zeData.safe_zone = [new Region()];
+zeData.human_spawns = [];
+zeData.zombie_spawns = [];
+zeData.safe_zone = [];
 zeData.goal_remaining = 20;
 zeData.zombie_ratio = 4;
 zeData.zombie_spawn_time = 15;
@@ -50,6 +50,7 @@ function inputTextField(id) {
     updateForums();
 }
 
+// General Setting.
 function updateForums() {
     $("#mapId").val(mapData.id);
     $("#mapName").val(mapData.name);
@@ -60,9 +61,20 @@ function updateForums() {
     $("#mapRoundTime").val(mapData.round_time);
     $("#mapSchematic").val(mapData.schematic);
     $("#mapVote").val(mapData.vote);
+    $('#mapLockWorldTime').val(mapData.lock_world_time);
+    $('#mapWorldTime').val(mapData.world_time);
+    updateForumsZE();
 }
 
-function initFunctions() {
+function updateForumsZE()
+{
+    $('#zeGoalRemaining').val(mapData.zombie_escape.goal_remaining);
+    $('#zeZombieSpawnTime').val(mapData.zombie_escape.zombie_spawn_time);
+    $('#zeZombieRatio').val(mapData.zombie_escape.zombie_ratio);
+
+}
+
+$(function() {
 
     $('#mapId').on('input', function(event) {
         mapData.id = $('#mapId').val();
@@ -71,7 +83,6 @@ function initFunctions() {
     $('#mapName').on('input', function(event) {
         mapData.name = $('#mapName').val();
     });
-
 
     $('#mapAuthor').on('input', function(event) {
         mapData.author = $('#mapAuthor').val();
@@ -107,4 +118,135 @@ function initFunctions() {
         mapData.vote = $('#mapVote').val();
     });
 
+    $('#mapLockWorldTime').change(function() {
+        var checked = $(this).is(':checked');
+        mapData.lock_world_time = checked;
+    });
+
+    $('#mapGameMode').change(function() {
+        changeGameMode($(this).val());
+    });
+
+});
+
+function addRegion(region, sizeNode, formNode) {
+        region.unshift(new Region());
+        var size = region.length;
+        sizeNode.val(size);
+//        var regionForm = createRegionForm(size);
+//        formNode.append(regionForm);
+}
+
+function removeRegion(region, sizeNode, formNode) {
+        region.shift();
+        var size = region.length;
+        sizeNode.val(size);
+//        formNode.remove();
+}
+
+// ZombieEscape
+$(function() {
+
+    $('#zeHumanSpawnSize .ze-region-add').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.human_spawns;
+
+        addRegion(region, sizeNode, $('#zeHumanSpawnRegionList'));
+    });
+
+    $('#zeHumanSpawnSize .ze-region-remove').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.human_spawns;
+
+        var indexNode = $('#zeHumanSpawnRegionList #ze-region-index-' + (region.length) + '');
+        removeRegion(region, sizeNode, indexNode);
+    });
+
+    $('#zeZombieSpawnSize .ze-region-add').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.zombie_spawns;
+
+        addRegion(region, sizeNode, $('#zeHumanSpawnRegionList'));
+    });
+
+    $('#zeZombieSpawnSize .ze-region-remove').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.zombie_spawns;
+
+        var indexNode = $('#zeZombieSpawnRegionList #ze-region-index-' + (region.length) + '');
+        removeRegion(region, sizeNode, indexNode);
+    });
+
+    $('#zeSafeZoneSize .ze-region-add').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.safe_zone;
+
+        addRegion(region, sizeNode, $('#zeZombieSpawnRegionList'));
+    });
+
+    $('#zeSafeZoneSize .ze-region-remove').click(function(event) {
+        var sizeNode = getZESizeNode($(this));
+        var ze = mapData.zombie_escape;
+        var region = ze.safe_zone;
+
+        var indexNode = $('#zeSafeZoneRegionList #ze-region-index-' + (region.length) + '');
+        removeRegion(region, sizeNode, indexNode);
+    });
+
+    $('#zeGoalRemaining').on('input', function(event) {
+        mapData.zombie_escape.goal_remaining = $(this).val();
+    });
+
+    $('#zeZombieSpawnTime').on('input', function(event) {
+        mapData.zombie_escape.zombie_spawn_time = $(this).val();
+    });
+
+    $('#zeZombieRatio').on('input', function(event) {
+        mapData.zombie_escape.zombie_ratio = $(this).val();
+    });
+
+});
+
+function getZESizeNode(node) {
+    return node.parents('.ze-region-group').find('.ze-region-size');
+}
+
+function changeGameMode(val) {
+    $('#game_mode_ze').hide();
+    switch (val) {
+    case 'ze':
+        $('#game_mode_ze').show();
+        break;
+    }
+}
+
+function createRegionForm(index_num) {
+    var html = '';
+    html += '<div id="ze-region-index-' + index_num + '" class="card ze-region-index">';
+    html += '   <div class="card-header">SpawnPoint ' + index_num + '</div>';
+    html += '   <div class="card-body">';
+    html += '       <div class="input-group">';
+    html += '           <div class="input-group-prepend">';
+    html += '               <div class="input-group-text">min</div>';
+    html += '           </div>';
+    html += '           <input type="number" aria-label="x" value="0.0" step="0.1" class="form-control"/>';
+    html += '           <input type="number" aria-label="y" value="0.0" step="0.1" class="form-control"/>';
+    html += '           <input type="number" aria-label="z" value="0.0" step="0.1" class="form-control"/>';
+    html += '       </div>';
+    html += '       <div class="input-group">';
+    html += '           <div class="input-group-prepend">';
+    html += '               <div class="input-group-text">max</div>';
+    html += '           </div>';
+    html += '           <input type="number" aria-label="x" value="0.0" step="0.1" class="form-control"/>';
+    html += '           <input type="number" aria-label="y" value="0.0" step="0.1" class="form-control"/>';
+    html += '           <input type="number" aria-label="z" value="0.0" step="0.1" class="form-control"/>';
+    html += '       </div>';
+    html += '   </div>'
+    html += '</div>';
+    return html;
 }
