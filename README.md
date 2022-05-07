@@ -2,4 +2,4 @@
 this is an MapEditor.
 
 url:
-https://thekarura.github.io/StorkEditor/
+https://KZENetwork.github.io/StorkEditor/
